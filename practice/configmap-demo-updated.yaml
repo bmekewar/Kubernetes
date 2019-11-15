@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+   name: demo-configmap
+data: 
+  app.name: busybox-app-updated
+  server.port: "9001"
+  application.properties: |
+    cache.cleanup.fixedrate: 10000
+    cache.cleanup.intialDelay: 10000
+    db.userName: user
+    db.password: pass
+    db.keystore.path: /mydata

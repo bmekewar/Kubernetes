@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+   name: quota-demo-ns
+   namespace: quota-demo-ns
+spec:
+   hard:
+     limits.memory: "100Mi"
+     requests.memory: "50Mi"

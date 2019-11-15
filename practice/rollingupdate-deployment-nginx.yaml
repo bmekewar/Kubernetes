@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    run: nginx
+  name: nginx-deployment
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels:
+      run: nginx
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2  # no of replicas
+      maxUnavailable: 1 # no of pods could be unavailable while applying stratergy 
+  minReadySeconds: 5  # waiting time for another pod to be created 
+  revisionHistoryLimit: 10 # number of updates or revisions done for this deployment
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.14.2
+        name: nginx
