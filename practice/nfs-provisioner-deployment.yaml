@@ -22,7 +22,7 @@ spec:
             - name: nfs-client-root
               mountPath: /persistentvolumes
           env:
-            - name: PROVISIONER_NAME
+            - name: PROVISIONER_NAME   
               value: example.com/nfs
             - name: NFS_SERVER
               value: 172.42.42.100
