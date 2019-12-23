@@ -1,0 +1,27 @@
+#bootstrap = <<SCRIPT
+#  useradd -m bmekewar --groups sudo
+#  su -c "printf 'cd /home/bmekewar\nsudo su bmekewar' >> .bash_profile" -s /bin/sh vagrant
+#SCRIPT
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+
+Vagrant.configure(2) do |config|
+
+  #config.vm.provision "shell", path: "provision.sh"
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  config.vm.define "centos7" do |centos7|
+    centos7.vm.box = "centos/7"
+    centos7.vm.hostname = "nginx.example.com"
+    centos7.vm.network "private_network", ip: "172.42.42.99"
+    centos7.vm.provider "virtualbox" do |v|
+      #v.gui= true
+	  v.name = "centos7"
+      v.memory = 1024
+      v.cpus = 1
+    end
+    centos7.vm.provision "shell", path: "centos7_provision.sh"
+  #config.ssh.username = "bmekewar"
+  end
+end
